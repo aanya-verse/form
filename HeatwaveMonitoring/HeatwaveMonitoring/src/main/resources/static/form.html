@@ -1,0 +1,462 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Heatwave Monitoring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f4f8;
+        }
+
+        .container {
+            width: 450px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d32f2f;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #d32f2f;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #d32f2f;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b71c1c;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌡 Heatwave Monitoring</h1>
+
+        <p class="subtitle">
+            Enter the weather information
+        </p>
+
+        <form id="heatwaveForm">
+
+            <label for="city">City</label>
+            <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter city name"
+                required
+            >
+
+            <label for="temperature">
+                Temperature (°C)
+            </label>
+
+            <input
+                type="number"
+                id="temperature"
+                name="temperature"
+                placeholder="Enter temperature"
+                step="0.1"
+                required
+            >
+
+            <label for="humidity">
+                Humidity (%)
+            </label>
+
+            <input
+                type="number"
+                id="humidity"
+                name="humidity"
+                placeholder="Enter humidity"
+                min="0"
+                max="100"
+                required
+            >
+
+            <label for="date">
+                Recorded Date
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                name="date"
+                required
+            >
+
+            <button type="submit">
+                Save Weather Data
+            </button>
+
+        </form>
+
+        <div class="result" id="result"></div>
+
+    </div>
+
+    <script>
+        document.getElementById("heatwaveForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                let temperature =
+                    document.getElementById("temperature").value;
+
+                let result =
+                    document.getElementById("result");
+
+                if (temperature >= 40) {
+
+                    result.style.display = "block";
+                    result.style.background = "#ffebee";
+                    result.style.color = "#c62828";
+
+                    result.innerHTML =
+                        "⚠ Heatwave Alert! Temperature is very high.";
+
+                } else {
+
+                    result.style.display = "block";
+                    result.style.background = "#e8f5e9";
+                    result.style.color = "#2e7d32";
+
+                    result.innerHTML =
+                        "✓ Temperature is within normal range.";
+                }
+            });
+    </script>
+
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Heatwave Monitoring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff3e0, #ffccbc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 450px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #d84315;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e64a19;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 7px;
+            background: #e64a19;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #bf360c;
+        }
+
+        #message {
+            margin-top: 18px;
+            padding: 12px;
+            text-align: center;
+            border-radius: 7px;
+            display: none;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 12px;
+            text-align: center;
+            background: #fff3e0;
+            color: #e65100;
+            border-radius: 7px;
+            display: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <h1>Heatwave Monitoring</h1>
+
+        <p class="subtitle">
+            Enter weather data for monitoring
+        </p>
+
+        <form id="heatwaveForm">
+
+            <!-- Data ID -->
+            <div class="form-group">
+                <label for="data_id">Data ID</label>
+
+                <input
+                    type="number"
+                    id="data_id"
+                    name="data_id"
+                    placeholder="Enter data ID"
+                    required
+                >
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label for="city">City</label>
+
+                <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Enter city name"
+                    maxlength="50"
+                    required
+                >
+            </div>
+
+            <!-- Temperature -->
+            <div class="form-group">
+                <label for="temp">Temperature (°C)</label>
+
+                <input
+                    type="number"
+                    id="temp"
+                    name="temp"
+                    placeholder="Enter temperature"
+                    required
+                >
+            </div>
+
+            <!-- Moisture -->
+            <div class="form-group">
+                <label for="moisture">Moisture (%)</label>
+
+                <input
+                    type="number"
+                    id="moisture"
+                    name="moisture"
+                    placeholder="Enter moisture"
+                    min="0"
+                    max="100"
+                    required
+                >
+            </div>
+
+            <button type="submit">
+                Save Weather Data
+            </button>
+
+        </form>
+
+        <!-- Heatwave message -->
+        <div class="alert" id="alertMessage"></div>
+
+        <!-- Success message -->
+        <div id="message"></div>
+
+    </div>
+
+
+   <script>
+
+document.getElementById("heatwaveForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let dataId = document.getElementById("data_id").value;
+    let city = document.getElementById("city").value;
+    let temp = document.getElementById("temp").value;
+    let moisture = document.getElementById("moisture").value;
+
+    let message = document.getElementById("message");
+    let alertMessage = document.getElementById("alertMessage");
+
+    const formData = new URLSearchParams();
+
+    formData.append("data_id", dataId);
+    formData.append("city", city);
+    formData.append("temp", temp);
+    formData.append("moisture", moisture);
+
+    fetch("/saveData", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        message.style.display = "block";
+        message.style.background = "#e8f5e9";
+        message.style.color = "#2e7d32";
+
+        message.innerHTML = data;
+
+        if (temp >= 40) {
+
+            alertMessage.style.display = "block";
+
+            alertMessage.innerHTML =
+                "⚠️ HEATWAVE ALERT! " +
+                city +
+                " has a temperature of " +
+                temp +
+                "°C.";
+
+        } else {
+
+            alertMessage.style.display = "none";
+        }
+
+    })
+
+    .catch(error => {
+
+        message.style.display = "block";
+        message.style.background = "#ffebee";
+        message.style.color = "#c62828";
+
+        message.innerHTML =
+            "❌ Error connecting to server.";
+
+        console.error(error);
+    });
+
+});
+
+</script>
+
+</body>
+</html>
