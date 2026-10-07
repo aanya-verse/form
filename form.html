@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatwave Monitoring</title>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffe4d6 50%, #ffd0bd 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            color: #292524;
+        }
+
+        .container {
+            width: min(100%, 520px);
+            background: rgba(255, 255, 255, 0.97);
+            padding: 34px;
+            border-radius: 20px;
+            box-shadow: 0 18px 45px rgba(124, 45, 18, 0.16);
+            border: 1px solid rgba(234, 88, 12, 0.10);
+        }
+
+        .header { text-align: center; margin-bottom: 28px; }
+
+        h1 { 
+            text-align: center;
+    color: #d84315;
+    margin-bottom: 8px; }
+        .subtitle { 
+            text-align: center;
+    color: #777;
+    margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #44403c;
+        }
+
+        .required { color: #ea580c; }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d6d3d1;
+            border-radius: 10px;
+            background: #fafaf9;
+            color: #292524;
+            font-size: 15px;
+            transition: 0.2s ease;
+        }
+
+        input::placeholder { color: #a8a29e; }
+
+        input:hover { border-color: #a8a29e; }
+
+        input:focus {
+            outline: none;
+            border-color: #f97316;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+        }
+
+        .button-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        button {
+            min-height: 46px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        }
+
+        button:hover { transform: translateY(-1px); }
+        button:active { transform: translateY(0); }
+
+        .save-btn {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            color: white;
+            box-shadow: 0 7px 16px rgba(234, 88, 12, 0.22);
+        }
+
+        .save-btn:hover { box-shadow: 0 9px 20px rgba(234, 88, 12, 0.30); }
+
+        .next-btn {
+            background: #1f2937;
+            color: white;
+        }
+
+        .next-btn:hover { background: #111827; }
+
+        .clear-btn {
+            background: #f5f5f4;
+            color: #57534e;
+            border: 1px solid #d6d3d1;
+        }
+
+        .clear-btn:hover { background: #e7e5e4; }
+
+        .hint {
+            margin-top: 16px;
+            text-align: center;
+            color: #a8a29e;
+            font-size: 12px;
+        }
+
+        #message, .alert {
+            margin-top: 18px;
+            padding: 13px 14px;
+            text-align: center;
+            border-radius: 10px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        #message { background: #ecfdf5; color: #166534; }
+        .alert { background: #fff7ed; color: #c2410c; font-weight: 700; }
+
+        @media (max-width: 520px) {
+            body { padding: 14px; }
+            .container { padding: 24px 20px; border-radius: 16px; }
+            h1 { font-size: 23px; }
+            .button-row { grid-template-columns: 1fr; }
+            .save-btn { grid-column: auto; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Heatwave Monitoring</h1>
+            <p class="subtitle">Enter weather data for monitoring</p>
+        </div>
+
+        <form id="heatwaveForm">
+            <div class="form-group">
+                <label for="data_id">Data ID <span class="required">*</span></label>
+                <input type="number" id="data_id" name="data_id" placeholder="Enter unique data ID" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City <span class="required">*</span></label>
+                <input type="text" id="city" name="city" placeholder="e.g. Mumbai" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="temp">Temperature (°C) <span class="required">*</span></label>
+                <input type="number" id="temp" name="temp" placeholder="Enter temperature" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="moisture">Moisture (%) <span class="required">*</span></label>
+                <input type="number" id="moisture" name="moisture" placeholder="0 - 100" min="0" max="100" step="0.1" required>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="save-btn">Save Weather Data</button>
+                <button type="button" class="next-btn" id="nextBtn">Next →</button>
+                <button type="button" class="clear-btn" id="clearBtn">Clear</button>
+            </div>
+        </form>
+
+        <div class="alert" id="alertMessage"></div>
+        <div id="message"></div>
+        <p class="hint">Use <strong>Next</strong> to start entering a new record.</p>
+    </div>
+
+    <script>
+        const form = document.getElementById("heatwaveForm");
+        const message = document.getElementById("message");
+        const alertMessage = document.getElementById("alertMessage");
+        const nextBtn = document.getElementById("nextBtn");
+        const clearBtn = document.getElementById("clearBtn");
+
+        function clearForm(showMessage = false) {
+            form.reset();
+            message.style.display = "none";
+            alertMessage.style.display = "none";
+
+            if (showMessage) {
+                message.style.display = "block";
+                message.style.background = "#eff6ff";
+                message.style.color = "#1d4ed8";
+                message.innerHTML = "✓ Form cleared. You can enter a new weather record.";
+            }
+
+            document.getElementById("data_id").focus();
+        }
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const dataId = document.getElementById("data_id").value;
+            const city = document.getElementById("city").value.trim();
+            const temp = Number(document.getElementById("temp").value);
+            const moisture = document.getElementById("moisture").value;
+
+            message.style.display = "block";
+            message.style.background = "#ecfdf5";
+            message.style.color = "#166534";
+            message.innerHTML = "✓ Weather data entered successfully!";
+
+            if (temp >= 40) {
+                alertMessage.style.display = "block";
+                alertMessage.innerHTML = "⚠️ HEATWAVE ALERT! " + city + " has a temperature of " + temp + "°C.";
+            } else {
+                alertMessage.style.display = "none";
+            }
+
+            console.log("Data ID:", dataId);
+            console.log("City:", city);
+            console.log("Temperature:", temp);
+            console.log("Moisture:", moisture);
+        });
+
+        // Next: clear the current record and prepare the form for new information.
+        nextBtn.addEventListener("click", function() {
+            clearForm(false);
+        });
+
+        // Clear: remove all entered information and messages.
+        clearBtn.addEventListener("click", function() {
+            clearForm(true);
+        });
+    </script>
+</body>
+</html>
